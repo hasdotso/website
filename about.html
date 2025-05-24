@@ -37,14 +37,33 @@
 
     <nav class="fixed top-0 left-0 right-0 z-50 p-4 bg-black/75 backdrop-blur-md">
         <div class="container mx-auto flex justify-between items-center max-w-6xl px-4">
-            <a href="index.html" class="text-2xl font-bold">
+            <a href="index.html" class="text-2xl font-bold z-10">
                 <span class="text-white">has</span><span class="text-zinc-400">.</span><span class="text-zinc-400">so</span>
             </a>
-            <div class="flex items-center space-x-5 md:space-x-8 text-sm">
-                <a href="about.html" data-lang-key="nav_about" class="text-white font-semibold transition-colors">About</a>
-                <a href="works.html" data-lang-key="nav_works" class="text-zinc-300 hover:text-white transition-colors">Works</a>
-                <a href="contact.html" data-lang-key="nav_contact" class="text-zinc-300 hover:text-white transition-colors">Contact</a>
-                <div class="lang-switcher ml-3 pl-3 border-l border-zinc-700 space-x-1">
+    
+            
+            <div class="md:hidden">
+                <button id="menu-toggle" aria-label="Apri menu" class="text-white focus:outline-none">
+                    <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                    <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+    
+            <div id="menu-items"
+                 class="hidden md:flex md:items-center md:space-x-5 text-sm
+                        absolute md:relative top-16 left-0 right-0 md:top-auto md:left-auto md:right-auto 
+                        bg-black/95 md:bg-transparent shadow-lg md:shadow-none rounded-b-lg md:rounded-none
+                        p-6 md:p-0 flex-col md:flex-row space-y-3 md:space-y-0">
+                
+                <a href="about.html" data-lang-key="nav_about" class="block text-center md:text-left py-2 md:py-0 text-zinc-300 hover:text-white transition-colors">About</a>
+                <a href="works.html" data-lang-key="nav_works" class="block text-center md:text-left py-2 md:py-0 text-zinc-300 hover:text-white transition-colors">Works</a>
+                <a href="contact.html" data-lang-key="nav_contact" class="block text-center md:text-left py-2 md:py-0 text-zinc-300 hover:text-white transition-colors">Contact</a>
+                
+                <div class="lang-switcher mt-3 md:mt-0 pt-3 md:pt-0 md:ml-3 md:pl-3 md:border-l border-zinc-700/50 space-x-2 flex items-center justify-center md:justify-start">
                     <button id="lang-en" lang="en" class="text-zinc-300 hover:text-white px-1">EN</button>
                     <span class="text-zinc-500">|</span>
                     <button id="lang-it" lang="it" class="text-zinc-300 hover:text-white px-1">IT</button>
@@ -78,7 +97,22 @@
     <div class="fixed bottom-8 text-zinc-500 text-sm left-1/2 -translate-x-1/2">
         <a href="mailto:hello@has.so" class="hover:text-white transition-colors">hello[at]has.so</a>
     </div>
+    <script>
+        //Mobile menu
+        const menuToggle = document.getElementById('menu-toggle');
+            const menuIconOpen = document.getElementById('menu-icon-open');
+            const menuIconClose = document.getElementById('menu-icon-close');
+            const menuItems = document.getElementById('menu-items');
 
+            if (menuToggle && menuItems && menuIconOpen && menuIconClose) {
+                menuToggle.addEventListener('click', () => {
+                    menuItems.classList.toggle('hidden');
+                    const isMenuNowOpen = !menuItems.classList.contains('hidden');
+                    menuIconOpen.classList.toggle('hidden', isMenuNowOpen);
+                    menuIconClose.classList.toggle('hidden', !isMenuNowOpen);
+                });
+            }
+    </script>
    <script>
         const translations = {
             en: {
