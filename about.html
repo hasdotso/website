@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Has.so | About</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Space Mono', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        nav {
+            font-family: 'Space Mono', monospace;
+        }
+        .main-content-area {
+            flex-grow: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .lang-switcher button.active {
+            color: #FFFFFF;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+
+    <nav class="fixed top-0 left-0 right-0 z-50 p-4 bg-black/75 backdrop-blur-md">
+        <div class="container mx-auto flex justify-between items-center max-w-6xl px-4">
+            <a href="index.html" class="text-2xl font-bold">
+                <span class="text-white">has</span><span class="text-zinc-400">.</span><span class="text-zinc-400">so</span>
+            </a>
+            <div class="flex items-center space-x-5 md:space-x-8 text-sm">
+                <a href="about.html" data-lang-key="nav_about" class="text-white font-semibold transition-colors">About</a>
+                <a href="works.html" data-lang-key="nav_works" class="text-zinc-300 hover:text-white transition-colors">Works</a>
+                <a href="contact.html" data-lang-key="nav_contact" class="text-zinc-300 hover:text-white transition-colors">Contact</a>
+                <div class="lang-switcher ml-3 pl-3 border-l border-zinc-700 space-x-1">
+                    <button id="lang-en" lang="en" class="text-zinc-300 hover:text-white px-1">EN</button>
+                    <span class="text-zinc-500">|</span>
+                    <button id="lang-it" lang="it" class="text-zinc-300 hover:text-white px-1">IT</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content-area pt-20 md:pt-24">
+        <div class="container mx-auto px-6 md:px-8 max-w-3xl py-10 md:py-16 text-left">
+            <h1 data-lang-key="about_title" class="text-4xl md:text-5xl font-bold text-white mb-8 md:mb-12">
+                About <span class="text-white">has</span><span class="text-zinc-400">.</span><span class="text-zinc-400">so</span>
+            </h1>
+            <div class="space-y-6 text-zinc-300 leading-relaxed text-base md:text-lg">
+                <p data-lang-key="about_p1">
+                    Many innovative projects and ideas, especially in their initial stages, risk remaining abstract concepts, devoid of a defined identity or formal structure. This lack can hinder their development, recognition, and ability to evolve.
+                </p>
+                <p data-lang-key="about_p2">
+                    `has.so` exists to provide a clear answer to this challenge. It functions as a foundational entity – a dedicated reference structure – designed to give clear identity, visibility, and essential support to a range of projects and initiatives.
+                </p>
+                <p data-lang-key="about_p3">
+                    Through `has.so`, projects gain not just a name and context, but a framework that facilitates their management, development, and, where necessary, establishes their formal or legal standing. The core aim is to give substance, recognition, and clear direction to innovation.
+                </p>
+                <p data-lang-key="about_p4">
+                    `has.so` is the environment where ideas take shape and projects find their identity to grow and make a mark. It provides the infrastructure for initiatives to transition from simple insights to defined, recognized entities.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed bottom-8 text-zinc-500 text-sm left-1/2 -translate-x-1/2">
+        <a href="mailto:hello@has.so" class="hover:text-white transition-colors">hello[at]has.so</a>
+    </div>
+
+   <script>
+        const translations = {
+            en: {
+                nav_about: "About",
+                nav_works: "Works",
+                nav_contact: "Contact",
+                about_title_main: "About has.so", 
+                about_p1: "Many innovative projects and ideas, especially in their initial stages, risk remaining abstract concepts, devoid of a defined identity or formal structure. This lack can hinder their development, recognition, and ability to evolve.",
+                about_p2: "`has.so` exists to provide a clear answer to this challenge. It functions as a foundational entity – a dedicated reference structure – designed to give clear identity, visibility, and essential support to a range of projects and initiatives.",
+                about_p3: "Through `has.so`, projects gain not just a name and context, but a framework that facilitates their management, development, and, where necessary, establishes their formal or legal standing. The core aim is to give substance, recognition, and clear direction to innovation.",
+                about_p4: "`has.so` is the environment where ideas take shape and projects find their identity to grow and make a mark. It provides the infrastructure for initiatives to transition from simple insights to defined, recognized entities."
+            },
+            it: {
+                nav_about: "Chi Siamo",
+                nav_works: "Progetti",
+                nav_contact: "Contatti",
+                about_title_main: "Riguardo has.so",
+                about_p1: "Molti progetti e idee innovative, specialmente nelle loro fasi iniziali, rischiano di rimanere concetti astratti, privi di un'identità definita o di una struttura formale. Questa mancanza può ostacolarne lo sviluppo, il riconoscimento e la capacità di evolvere.",
+                about_p2: "`has.so` esiste per fornire una risposta chiara a questa sfida. Funziona come un'entità fondante – una struttura di riferimento dedicata – progettata per dare identità chiara, visibilità e supporto essenziale a una serie di progetti e iniziative.",
+                about_p3: "Attraverso `has.so`, i progetti ottengono non solo un nome e un contesto, ma un framework che ne facilita la gestione, lo sviluppo e, dove necessario, ne stabilisce l'assetto formale o legale. L'obiettivo principale è dare sostanza, riconoscimento e una direzione chiara all'innovazione.",
+                about_p4: "`has.so` è l'ambiente dove le idee prendono forma e i progetti trovano la loro identità per crescere e lasciare un segno. Fornisce l'infrastruttura che permette alle iniziative di passare da semplici intuizioni a entità definite e riconosciute."
+            }
+        };
+
+        let currentLang = localStorage.getItem('lang') || 'en';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            document.documentElement.lang = lang;
+
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (translations[lang] && translations[lang][key]) {
+                     if (key === 'about_title') {
+                        const mainTitleText = translations[lang]['about_title_main'] || (lang === 'en' ? "About has.so" : "Riguardo has.so");
+                        const hasSoSpan = `<span class="text-white">has</span><span class="text-zinc-400">.</span><span class="text-zinc-400">so</span>`;
+                        if (mainTitleText.includes("has.so")) {
+                             element.innerHTML = mainTitleText.replace("has.so", hasSoSpan);
+                        } else {
+                             element.innerHTML = `${mainTitleText.replace(" Riguardo ", "").replace(" About ", "")} ${hasSoSpan}`;
+                        }
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            
+            document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+            document.getElementById('lang-it').classList.toggle('active', lang === 'it');
+
+            const pageLinks = { "about.html": "nav_about", "works.html": "nav_works", "contact.html": "nav_contact" };
+            Object.keys(pageLinks).forEach(pageFile => {
+                const linkElement = document.querySelector(`a[href="${pageFile}"]`);
+                if (linkElement) {
+                    if (window.location.pathname.endsWith(pageFile)) {
+                        linkElement.classList.add('text-white', 'font-semibold');
+                        linkElement.classList.remove('text-zinc-300');
+                    } else {
+                        linkElement.classList.add('text-zinc-300');
+                        linkElement.classList.remove('text-white', 'font-semibold');
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langEnButton = document.getElementById('lang-en');
+            const langItButton = document.getElementById('lang-it');
+            if (langEnButton) langEnButton.addEventListener('click', () => setLanguage('en'));
+            if (langItButton) langItButton.addEventListener('click', () => setLanguage('it'));
+            setLanguage(currentLang);
+        });
+    </script>
+</body>
+</html>

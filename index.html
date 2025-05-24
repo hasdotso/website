@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Has.so | Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Space Mono', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        nav {
+            font-family: 'Space Mono', monospace;
+        }
+
+        #dynamic-text {
+            transition: opacity 0.5s ease-in-out,
+                color 0.5s ease-in-out,
+                background-color 0.5s ease-in-out;
+            opacity: 1;
+        }
+
+        #dynamic-text.typing::after {
+            content: '_';
+            display: inline-block;
+            animation: blink 0.7s infinite;
+            margin-left: 3px;
+        }
+
+        #dynamic-text.typing-done::after {
+            content: '';
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .log-line {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            margin-bottom: 0.3em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .log-line.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="bg-black text-white">
+
+    <nav class="fixed top-0 left-0 right-0 z-50 p-4 bg-black/75 backdrop-blur-md">
+        <div class="container mx-auto flex justify-between items-center max-w-6xl px-4">
+            <div class="text-2xl font-bold">
+                <span class="text-white">has</span><span class="text-zinc-400">.</span><span
+                    class="text-zinc-400">so</span>
+            </div>
+            <div class="space-x-5 md:space-x-8 text-sm">
+                <a href="about.html" class="text-zinc-300 hover:text-white transition-colors">About</a>
+                <a href="works.html" class="text-zinc-300 hover:text-white transition-colors">Works</a>
+                <a href="contact.html" class="text-zinc-300 hover:text-white transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div
+        class="container mx-auto px-4 flex flex-col md:flex-row items-stretch w-full max-w-6xl pt-20 md:pt-24 flex-grow">
+        <div class="md:w-1/2 flex flex-col justify-center items-start p-6 md:p-8 text-left">
+            <h1 class="text-4xl md:text-6xl font-bold mb-2 md:mb-4">
+                <span class="text-white">has</span><span class="text-zinc-400">.</span><span
+                    class="text-zinc-400">so</span>
+            </h1>
+            <p id="dynamic-text"
+                class="text-xl md:text-2xl text-zinc-300 mt-2 md:mt-4 px-3 py-1.5 rounded-md typing-done"></p>
+        </div>
+
+        <div class="md:w-1/2 flex items-center justify-center p-6 md:p-8 mt-8 md:mt-0">
+            <div id="log-feed-container"
+                class="w-full h-64 md:h-auto md:max-h-[380px] md:min-h-[250px] md:aspect-video bg-zinc-900 rounded-lg p-4 overflow-hidden font-mono text-sm text-zinc-400">
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed bottom-8 text-zinc-500 text-sm left-1/2 -translate-x-1/2">
+        <a href="mailto:hello@has.so" class="hover:text-white transition-colors">hello[at]has.so</a>
+    </div>
+
+    <script>
+        const texts = [
+            "Every problem has.so(lution).",
+            "Every idea has.so(me) place.",
+        ];
+        let currentIndex = 0;
+        const dynamicTextElement = document.getElementById('dynamic-text');
+
+        let isTextHighlighted = false;
+        let currentTypingInterval = null;
+
+        const taglineFadeDuration = 500;
+        const typingSpeed = 80;
+        const pauseAfterTyping = 2500;
+
+        dynamicTextElement.textContent = texts[currentIndex];
+        if (isTextHighlighted) {
+            dynamicTextElement.classList.remove('text-zinc-300');
+            dynamicTextElement.classList.add('bg-zinc-300', 'text-black');
+        } else {
+            dynamicTextElement.classList.remove('bg-zinc-300', 'text-black');
+            dynamicTextElement.classList.add('text-zinc-300');
+        }
+        dynamicTextElement.classList.add('typing-done');
+        dynamicTextElement.style.opacity = '1';
+
+        function typeWriterEffect(textToType, targetElement) {
+            let charIndex = 0;
+            targetElement.textContent = '';
+            targetElement.classList.add('typing');
+            targetElement.classList.remove('typing-done');
+
+            if (currentTypingInterval) {
+                clearInterval(currentTypingInterval);
+            }
+
+            currentTypingInterval = setInterval(() => {
+                if (charIndex < textToType.length) {
+                    targetElement.textContent += textToType.charAt(charIndex);
+                    charIndex++;
+                } else {
+                    clearInterval(currentTypingInterval);
+                    currentTypingInterval = null;
+                    targetElement.classList.remove('typing');
+                    targetElement.classList.add('typing-done');
+                }
+            }, typingSpeed);
+        }
+
+        function animateTaglineChange() {
+            dynamicTextElement.style.opacity = '0';
+
+            if (currentTypingInterval) {
+                clearInterval(currentTypingInterval);
+                currentTypingInterval = null;
+                dynamicTextElement.classList.remove('typing');
+                dynamicTextElement.classList.add('typing-done');
+            }
+
+            setTimeout(() => {
+                isTextHighlighted = !isTextHighlighted;
+                if (isTextHighlighted) {
+                    dynamicTextElement.classList.remove('text-zinc-300');
+                    dynamicTextElement.classList.add('bg-zinc-300', 'text-black');
+                } else {
+                    dynamicTextElement.classList.remove('bg-zinc-300', 'text-black');
+                    dynamicTextElement.classList.add('text-zinc-300');
+                }
+
+                currentIndex = (currentIndex + 1) % texts.length;
+                const newText = texts[currentIndex];
+
+                dynamicTextElement.style.opacity = '1';
+                typeWriterEffect(newText, dynamicTextElement);
+
+            }, taglineFadeDuration);
+        }
+
+        const longestTextLength = texts.reduce((max, text) => Math.max(max, text.length), 0);
+        const maxTypingDuration = longestTextLength * typingSpeed;
+        const taglineIntervalTime = taglineFadeDuration + maxTypingDuration + pauseAfterTyping;
+
+        setInterval(animateTaglineChange, taglineIntervalTime);
+
+
+        const logFeedContainer = document.getElementById('log-feed-container');
+        const logMessages = [
+            "Init [OK]",
+            "Listening...",
+            "Stream active",
+            "Matrix loaded",
+            "Analyzing...",
+            "Match: [SOL-X]",
+            "Running...",
+            "Compiling...",
+            "Idea#3668",
+            "Active [monitor]",
+            "Integrity [OK]",
+            "Params updated",
+            "has.so online",
+            "has.so(me) place",
+            "has.so(lution)",
+            "Detecting...",
+            "Link: stable",
+            "Finalizing...",
+            "Done."
+        ];
+        let currentLogMessageIndex = 0;
+        const maxLogLines = 8;
+        const logLineFadeDuration = 500;
+
+        function addLogMessage() {
+            if (!logFeedContainer) return;
+
+            const newMessageText = logMessages[currentLogMessageIndex];
+            currentLogMessageIndex = (currentLogMessageIndex + 1) % logMessages.length;
+
+            const newLine = document.createElement('div');
+            newLine.classList.add('log-line');
+            newLine.textContent = `> ${newMessageText}`;
+
+            logFeedContainer.prepend(newLine);
+
+            void newLine.offsetWidth;
+            newLine.classList.add('visible');
+
+            if (logFeedContainer.children.length > maxLogLines) {
+                const oldLine = logFeedContainer.lastElementChild;
+                if (oldLine) {
+                    oldLine.style.opacity = '0';
+                    oldLine.style.transform = 'translateY(-10px)';
+                    setTimeout(() => {
+                        if (logFeedContainer.contains(oldLine)) {
+                            logFeedContainer.removeChild(oldLine);
+                        }
+                    }, logLineFadeDuration);
+                }
+            }
+        }
+
+        if (logFeedContainer) {
+            const initialLogLines = Math.min(maxLogLines, logMessages.length) / 2;
+            for (let i = 0; i < initialLogLines; i++) {
+                setTimeout(addLogMessage, i * (logLineFadeDuration / 1.5));
+            }
+            setInterval(addLogMessage, 2200);
+        }
+    </script>
+</body>
+
+</html>
